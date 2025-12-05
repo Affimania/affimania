@@ -12,18 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # 🟢 CHANGE 1: DEPENDENCIES AUR NODE SETUP
       - name: Setup Node.js (for running script)
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-
-      # Yeh woh jagah hai jahan deals ka data fetch hoga aur index.html update hoga.
-      # Abhi yeh sirf ek dummy script run karega.
+          
+      - name: Install Dependencies
+        run: npm install
+      # ----------------------------------------
+        
       - name: Fetch and Update Deals
-        run: |
-          echo "Starting daily deal fetch and update..."
-          # ********** ADVANCED CODING REQUIRED HERE **********
-          # Jaise ki: node update_script.js (iska code abhi banana hai)
+        run: npm start # 🟢 CHANGE 2: SCRIPT CHALANA
           
       - name: Commit Updated Index
         run: |
