@@ -1,16 +1,309 @@
-## Hi there 👋
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFFIMANIA AI App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> 
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#3b82f6">
 
-<!--
-**Affimania/affimania** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+    <style>
+        /* ... (styles remain the same) ... */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        /* Custom scrollbar for modern look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a5b4fc;
+            border-radius: 4px;
+        }
+        /* Gradient for the final link button */
+        .affiliate-link-button {
+            background-image: linear-gradient(to right, #10b981 0%, #059669  51%, #10b981  100%);
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .affiliate-link-button:hover {
+            background-position: right center; /* change the direction of the change on hover */
+        }
+        
+        /* Unified Style for Contact Buttons */
+        .contact-button {
+            display: flex; /* Flex container for icon and text */
+            align-items: center;
+            justify-content: center; /* Center the content */
+            padding: 8px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            color: #1f2937; /* Default text color */
+            text-decoration: none; /* Remove underline */
+            font-weight: 600;
+        }
+        
+        /* Specific Hover Styles */
+        .insta-button:hover {
+            transform: scale(1.05);
+            border-color: #ec4899; /* Pink hover border for Instagram */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            color: #ec4899;
+        }
+        .email-button:hover {
+            transform: scale(1.05);
+            border-color: #3b82f6; /* Blue hover border for Email */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            color: #3b82f6;
+        }
 
-Here are some ideas to get you started:
+    </style>
+</head>
+<body class="min-h-screen flex items-start justify-center p-4">
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+    <div id="app-container" class="w-full max-w-md bg-white shadow-2xl rounded-2xl p-6 transition-all duration-300 border-t-4 border-blue-600">
+        
+        <header class="text-center mb-4">
+            <div class="text-4xl mb-2 flex items-center justify-center text-blue-600">
+                <span class="mr-2">💡</span> AFFIMANIA AI
+            </div>
+            <h1 class="text-xl font-bold text-gray-800">Aapka Intelligent Price Optimization Assistant</h1>
+        </header>
+        
+        <div class="bg-yellow-50 border border-yellow-300 p-3 rounded-lg flex items-center mb-6">
+            <span class="text-yellow-600 mr-3 text-xl">🔒</span>
+            <div>
+                <p class="text-sm font-semibold text-yellow-800">Data Safety Assurance</p>
+                <p class="text-xs text-yellow-700">Hum aapka koi bhi Personal Data store nahi karte. Aapka data yahan 100% safe hai.</p>
+            </div>
+        </div>
+
+        <div id="output-message" class="bg-indigo-50 p-3 rounded-lg text-sm text-indigo-700 font-medium mb-6 transition-all duration-300">
+            AFFIMANIA AI: Welcome! Aapki shopping journey shuru karne ke liye, konsa product chahiye?
+        </div>
+
+        <form id="affimania-form" class="space-y-4">
+            
+            <div>
+                <label for="product" class="block text-sm font-medium text-gray-700 mb-1">Product Ka Naam</label>
+                <input type="text" id="product" name="product" required
+                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                       placeholder="Jaise: Black Formal Shirt, Gaming Headset">
+            </div>
+
+            <div class="flex space-x-4">
+                <div class="w-1/2">
+                    <label for="min_price" class="block text-sm font-medium text-gray-700 mb-1">Minimum Price (₹)</label>
+                    <input type="number" id="min_price" name="min_price" required min="1"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                           placeholder="500">
+                </div>
+                <div class="w-1/2">
+                    <label for="max_price" class="block text-sm font-medium text-gray-700 mb-1">Maximum Price (₹)</label>
+                    <input type="number" id="max_price" name="max_price" required min="1"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                           placeholder="1500">
+                </div>
+            </div>
+            
+            <button type="submit" id="search-button"
+                    class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 shadow-md transform hover:scale-[1.01] transition-transform">
+                🔍 AFFIMANIA Search Karo!
+            </button>
+        </form>
+
+        <div id="result-card" class="mt-6 hidden bg-green-50 p-4 rounded-xl border-2 border-green-300 shadow-lg">
+            <h2 class="text-xl font-bold text-green-700 mb-3 flex items-center">
+                <span class="text-green-500 mr-2">⭐</span> BEST PRICE FOUND!
+            </h2>
+            <div class="text-sm space-y-3">
+                <p class="text-gray-700"><strong>🔎 Product:</strong> <span id="res-product" class="font-semibold text-gray-900"></span></p>
+                <p class="text-gray-700"><strong>💰 Budget Range:</strong> ₹<span id="res-min" class="font-semibold"></span> to ₹<span id="res-max" class="font-semibold"></span></p>
+                
+                <p class="mt-4 text-center"><strong>🚀 Click for Optimized Deal:</strong></p>
+                
+                <a id="res-link" target="_blank" class="block p-3 rounded-lg font-bold affiliate-link-button">
+                    <span class="mr-2">🛒</span> AMAZON PAR BEST DEAL DEKHO!
+                </a>
+            </div>
+            <p class="text-xs text-green-600 mt-3 text-center font-medium italic">
+                Commerce Insight: Yeh link hamare exclusive **'Best Price Partner Tag'** se optimize kiya gaya hai.
+            </p>
+        </div>
+        
+        <div id="deals-container" class="mt-8 p-4 bg-gray-50 rounded-lg shadow-inner border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2 text-center">🔥 Aaj Ki Top Trending Deals</h2>
+            <div id="deals-list" class="space-y-4">
+                <p id="loading-message" class="text-center text-gray-500">Deals loading...</p>
+            </div>
+        </div>
+        <div class="mt-8 pt-4 border-t border-gray-200 text-center">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">Customer Support & Connect</h3>
+
+            <div class="flex flex-col space-y-4 items-center">
+                <a href="mailto:affimania1@gmail.com" class="contact-button email-button w-full max-w-xs">
+                    <svg class="w-5 h-5 mr-2 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2-3H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2z"></path></svg>
+                    affimania1@gmail.com
+                </a>
+
+                <a href="https://www.instagram.com/affimania" target="_blank" class="contact-button insta-button w-full max-w-xs" aria-label="Instagram Profile">
+                    <svg class="w-5 h-5 mr-2 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5c2.454 0 2.768.01 3.738.053 1.05.048 1.795.212 2.453.468a4.116 4.116 0 011.493.992 4.116 4.116 0 01.992 1.493c.256.658.42 1.403.468 2.453.043.97.053 1.284.053 3.738s-.01 2.768-.053 3.738c-.048 1.05-.212 1.795-.468 2.453a4.116 4.116 0 01-.992 1.493 4.116 4.116 0 01-1.493.992c-.658.256-1.403.42-2.453.468-.97.043-1.284.053-3.738.053s-2.768-.01-3.738-.053c-1.05-.048-1.795-.212-2.453-.468a4.116 4.116 0 01-1.493-.992 4.116 4.116 0 01-.992-1.493c-.256-.658-.42-1.403-.468-2.453-.043-.97-.053-1.284-.053-3.738s.01-2.768.053-3.738c.048-1.05.212-1.795.468-2.453a4.116 4.116 0 01.992-1.493 4.116 4.116 0 011.493-.992c.658-.256 1.403-.42 2.453-.468.97-.043 1.284-.053 3.738-.053z"/>
+                        <circle cx="12" cy="12" r="3.2"/>
+                    </svg>
+                    <span class="font-semibold">@affimania</span>
+                </a>
+            </div>
+            
+            <p class="text-xs text-gray-400 mt-4">© <span id="current-year">2025</span> AFFIMANIA AI. All Rights Reserved.</p>
+        </div>
+
+    </div>
+    
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+    
+    <script>
+        // Aapka Affiliate Tag
+        const AFFILIATE_TAG = "ascreation00f-21";
+        
+        const form = document.getElementById('affimania-form');
+        const outputMessage = document.getElementById('output-message');
+        const resultCard = document.getElementById('result-card');
+        const searchButton = document.getElementById('search-button');
+        
+        // --- FUNCTION TO LOAD DEALS (CMS integration ka next step hoga) ---
+        function loadDailyDeals() {
+            // Abhi yeh section CMS se data nahi khinch raha hai.
+            // Hum ismein ek dummy deal daalte hain taki design tyaar ho jaye.
+            
+            const dummyDeals = [
+                {
+                    title: "Sony Noise Cancelling Headphone",
+                    price: 25999,
+                    mrp: 30000,
+                    savings: "₹4001 Off",
+                    affiliate_link: "https://www.amazon.in/s?k=Sony+Headphones&tag=" + AFFILIATE_TAG,
+                    image: "https://m.media-amazon.com/images/I/41KqN4Qe9NL._SX300_SY300_QL70_FMwebp_.jpg"
+                },
+                {
+                    title: "Echo Dot (5th Gen) Smart Speaker",
+                    price: 3999,
+                    mrp: 5499,
+                    savings: "₹1500 Off",
+                    affiliate_link: "https://www.amazon.in/s?k=Echo+Dot&tag=" + AFFILIATE_TAG,
+                    image: "https://m.media-amazon.com/images/I/41+y9L1WqHL._AC_UF228,228_FM_jpg_.jpg"
+                }
+            ];
+
+            const dealsListElement = document.getElementById('deals-list');
+            dealsListElement.innerHTML = ''; // Loading message hatana
+
+            dummyDeals.forEach(deal => {
+                const dealCard = document.createElement('div');
+                dealCard.className = 'bg-white p-4 rounded-lg shadow-md border border-red-100 flex space-x-4 items-center';
+                dealCard.innerHTML = `
+                    <div class="w-1/4 flex-shrink-0">
+                        <img src="${deal.image}" alt="${deal.title}" class="w-full h-auto object-contain rounded-md">
+                    </div>
+                    <div class="w-3/4">
+                        <h3 class="text-base font-semibold text-gray-900 mb-1">${deal.title}</h3>
+                        <p class="text-xs text-gray-500 line-through">M.R.P. ₹${deal.mrp.toLocaleString('en-IN')}</p>
+                        <p class="text-xl font-bold text-red-600 mb-2">Deal: ₹${deal.price.toLocaleString('en-IN')}</p>
+                        <p class="text-sm font-medium text-green-700 mb-3">${deal.savings} SAVED!</p>
+                        <a href="${deal.affiliate_link}" 
+                           target="_blank" 
+                           class="text-xs px-3 py-1 rounded font-bold transition duration-300 bg-yellow-500 hover:bg-yellow-600 text-white">
+                           DEAL PAR CLICK KAREN
+                        </a>
+                    </div>
+                `;
+                dealsListElement.appendChild(dealCard);
+            });
+        }
+        
+        // Page load hone par deals load karein
+        window.addEventListener('load', loadDailyDeals);
+        // --- END OF DEALS FUNCTION ---
+
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const product = document.getElementById('product').value.trim();
+            const minPrice = parseInt(document.getElementById('min_price').value);
+            const maxPrice = parseInt(document.getElementById('max_price').value);
+
+            // Basic Validation
+            if (!product || isNaN(minPrice) || isNaN(maxPrice) || minPrice <= 0 || maxPrice <= 0 || minPrice > maxPrice) {
+                outputMessage.className = 'bg-red-100 p-3 rounded-lg text-sm text-red-700 font-medium mb-6';
+                outputMessage.textContent = '❌ Input Galat Hai! Product, Min Price aur Max Price (Min se zyada) sahi daalein.';
+                resultCard.classList.add('hidden');
+                return;
+            }
+
+            // Loading state
+            searchButton.textContent = '🔍 AFFIMANIA Search Kar Raha Hai...';
+            searchButton.disabled = true;
+
+            // --- C. Dynamic Link Generation (The Core AI/Filtering Logic) ---
+            
+            // 1. Product Naam ko URL-friendly banana (spaces ko '+' se replace karna)
+            const searchQuery = product.replace(/\s/g, '+');
+            
+            // 2. Amazon Search URL banana aur usmein Affiliate Tag, Product, aur Price range jodna
+            const dynamicLink = (
+                `https://www.amazon.in/s?k=${searchQuery}` +
+                `&low-price=${minPrice}` +
+                `&high-price=${maxPrice}` +
+                `&tag=${AFFILIATE_TAG}` 
+            );
+
+            // Simulate AI processing time (for better demo)
+            setTimeout(() => {
+                // Update UI with results
+                document.getElementById('res-product').textContent = product;
+                document.getElementById('res-min').textContent = minPrice.toLocaleString('en-IN');
+                document.getElementById('res-max').textContent = maxPrice.toLocaleString('en-IN');
+                
+                const resLink = document.getElementById('res-link');
+                resLink.href = dynamicLink;
+
+                outputMessage.className = 'bg-green-100 p-3 rounded-lg text-sm text-green-700 font-medium mb-6';
+                outputMessage.textContent = `✅ AFFIMANIA AI: ${product.split(' ')[0]} ke liye optimized search ready hai! Niche result dekho.`;
+                resultCard.classList.remove('hidden');
+
+                // Reset button
+                searchButton.textContent = '🔍 AFFIMANIA Search Karo!';
+                searchButton.disabled = false;
+            }, 1000); // 1 second ka AI Processing time
+        });
+        
+        window.addEventListener('load', () => {
+             console.log('AFFIMANIA AI App Loaded. Ready for Price Optimization.');
+        });
+    </script>
+</body>
+</html>
