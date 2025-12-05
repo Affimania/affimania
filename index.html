@@ -14,6 +14,29 @@
     <meta name="theme-color" content="#3b82f6">
 
     <style>
+        <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Aapka Unique Firebase Configuration (Image se liya gaya)
+        const firebaseConfig = {
+          apiKey: "AIzaSyBnACV3LWdkZldSRl1GoV7AlTANKrC6Yh8",
+          authDomain: "affimania-ai.firebaseapp.com",
+          projectId: "affimania-ai",
+          storageBucket: "affimania-ai.appspot.com",
+          messagingSenderId: "870720070496",
+          appId: "1:870720070496:web:3e44a017ad44fbc4e5f405"
+        };
+
+        // Firebase ko initialize karna
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = app.auth(); // Authentication service (Login/Signup ke liye)
+        const db = app.firestore(); // Database service (History tracking ke liye)
+
+        // Console mein check karne ke liye:
+        console.log('Firebase App Connected. Ready for Auth and DB.'); 
+    </script>
         /* ... (styles remain the same) ... */
         body {
             font-family: 'Inter', sans-serif;
