@@ -12,10 +12,10 @@ jobs:
     permissions: # Write permission for GitHub Pages
       contents: write 
     steps:
-      # 🛑 CRITICAL FIX: TOKEN KO CHECKOUT MEIN PASS KAREN
+      # 🛑 CRITICAL FIX: TOKEN KO CHECKOUT MEIN PASS KARNA (Final fix for push failure)
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GH_TOKEN }} # ⬅️ GH_TOKEN use kiya gaya
+          token: ${{ secrets.GH_TOKEN }} 
           
       # DEPENDENCIES AUR NODE SETUP
       - name: Setup Node.js (for running script)
@@ -38,5 +38,5 @@ jobs:
           git config user.email "affimania-bot@users.github.com"
           git add index.html 
           git commit -m "Automated: Daily deal update by GitHub Action" || echo "No changes to commit"
-          # ✅ FINAL PUSH FIX: Simple git push ka use kiya
+          # ✅ FINAL PUSH FIX: Simple git push ka use kiya (Token checkout step se mil gaya)
           git push
