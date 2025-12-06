@@ -1,19 +1,21 @@
 backend:
   name: github
-  repo: affimania/affimania 
+  repo: affimania/affimania
   branch: main 
 
-media_folder: "assets/img" 
+media_folder: "assets/img"
 public_folder: "/assets/img"
 
 collections:
   - name: "deals"
     label: "Amazon Daily Deals"
-    folder: "_deals" 
+    folder: "_deals"
     create: true
     slug: "{{date}}-{{slug}}"
     fields:
       - {label: "Product Name", name: "title", widget: "string"}
+      # 🟢 ADDED: MRP field (Future proofing ke liye)
+      - {label: "MRP (₹)", name: "mrp", widget: "number"} 
       - {label: "Current Price (₹)", name: "price", widget: "number"}
       - {label: "Savings", name: "savings", widget: "string"}
       - {label: "Amazon Affiliate Link", name: "affiliate_link", widget: "string"}
