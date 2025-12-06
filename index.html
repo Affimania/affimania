@@ -999,12 +999,13 @@ const dummyDeals = [
                 // 🟢 FINAL FIX: Grid Item Card ka HTML
                 dealCard.className = 'bg-white p-4 rounded-lg shadow-md border border-red-100 flex flex-col justify-between h-full'; 
                 
+                // Final HTML structure: Responsive Card
                 dealCard.innerHTML = `
                     <div class="flex-shrink-0 mb-3 h-32 flex items-center justify-center">
                         <img src="${deal.image}" 
                              alt="${deal.title}" 
                              class="max-w-full max-h-full object-contain rounded-md"
-                             onerror="this.onerror=null; this.src='https://placehold.co/150x150?text=AFFIMANIA+DEAL+IMAGE';"> 
+                             onerror="this.onerror=null; this.src='https://placehold.co/150x150?text=AFFIMANIA';"> 
                     </div>
                     <div class="flex-grow">
                         <h3 class="text-base font-semibold text-gray-900 mb-1 line-clamp-2">${deal.title}</h3>
