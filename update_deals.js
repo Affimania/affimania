@@ -23,8 +23,8 @@ for (let i = 1; i <= NUM_DEALS; i++) {
         mrp: mrp,
         savings: `Flat ${Math.round(((mrp - price) / mrp) * 100)}% Off`,
         affiliate_link: `https://www.amazon.in/s?k=${randomProduct.replace(/\s/g, '+')}&tag=ascreation00f-21`, 
-        // 🟢 FIX: WORKING STATIC PLACEHOLDER IMAGE URL
-        image: "https://placehold.co/150x150?text=DEAL" 
+        // 🟢 FIX 1: WORKING PLACEHOLDER MEIN 'AFFIMANIA'
+        image: "https://placehold.co/150x150?text=AFFIMANIA" 
     });
 }
 // --- END: 99 DEALS GENERATE KARNE WALA LOGIC ---
